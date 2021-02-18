@@ -1,0 +1,10 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: {{ required "A value for  .Values.identityName is required!" .Values.identityName }}
+spec:
+  type: 1
+  tenantID: {{ required "A value for  .Values.tenantID is required!" .Values.tenantID }}
+  resourceID: {{ required "A value for  .Values.resourceID is required!" .Values.resourceID }}
+  clientID: {{ required "A value for  .Values.clientID is required!" .Values.clientID }}
+  clientPassword: {"name":"{{ include "pod-identity.fullname" . }}", "namespace":"{{ .Release.Namespace }}"}
